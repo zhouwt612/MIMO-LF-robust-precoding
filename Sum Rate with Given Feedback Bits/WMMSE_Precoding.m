@@ -1,4 +1,28 @@
 function [Pk,Pk_itea,Rate_Itea] = WMMSE_Precoding(Hhatk,H,Pinit,mu,rho,sigma2,itea_num)
+% WMMSE precoding
+%This code refers to the following scientific article:
+%
+% Wentao Zhou, Di Zhang, Mérouane Debbah, and Inkyu Lee,
+% "Robust Precoding Designs for Multiuser MIMO Systems with Limited Feedback,
+%" IEEE Transactions on Wireless Communications, To appear.
+% 
+% This is version 1.0 (last edited: 2024-04-08)
+% 
+%License: This code is licensed under the GPLv2 license. If you in any way
+%use this code for research that results in publications, please cite our
+%original article listed above.
+% Input:
+% Hhatk: the quantized channels (size: M,N,K)
+% H: real channels (for the calculation of achievable rate)
+% Pinit: initial precoding matrices
+% mu: weight matrix (size: 1,K)
+% rho: transmit power
+% sigma2: noise power
+% itea_num: # of iterations
+% Output:
+% Pk: precoding matrices
+% Pk_itea: precoding matrices concatenations
+% Rate_Itea: concatenation of each iteration
 [M,N,K] = size(Hhatk);
 P = zeros(M,M);
 for idx1 = 1:1:K
